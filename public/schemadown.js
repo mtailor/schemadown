@@ -49,12 +49,6 @@
             .call(force.drag)
             ;
 
-        var cpt = { val : 0 };
-        addText(cpt, svg, "minSize : " + minSize)
-        addText(cpt, svg, "n : " + n)
-        addText(cpt, svg, "Math.log(n) : " + Math.log(n))
-        addText(cpt, svg, "charge : " + charge)
-        addText(cpt, svg, "r : " + r)
 
         force.on("tick", function() {
             link
@@ -76,127 +70,15 @@
         };
     }
     
-    function addText(cptHolder, root, text){
-        root
-            .append("text")
-            .text(text)
-            .attr("x", "50")
-            .attr("y", "" + (50 + (cptHolder.val * 15)))
-            .attr("font-size", "10px")
-            .attr("fill", "white");
-        cptHolder.val = cptHolder.val + 1;
+    
+    function schemadown(file){
+        d3.text(file, function(content){
+           var nodesAndLinks = GeneratedParser.parse(content);
+           newGraph(500, 500, nodesAndLinks.nodes, nodesAndLinks.links, "black");
+        });
     }
+    
 
-    (function(){
-        var a = {};
-        var b = {};
-        var c = {};
-        var d = {};
-        var e = {};
-        var f = {};
-        var g = {};
-        var h = {};
-        var i = {};
-        var j = {};
-        var nodes = [a, b, c, d, e, f, g, h, i, j];
-        var links = [
-            newLink(a, b),
-            newLink(b, c),
-            newLink(c, d),
-            newLink(d, e),
-            newLink(e, f),
-            newLink(f, a),
-            newLink(a, h),
-            newLink(a, i),
-            newLink(a, j),
-            newLink(g, a),
-            newLink(g, b),
-            newLink(g, f),
-            newLink(g, d)
-        ];
-        newGraph(200, 200, nodes, links, "blue");
-    })();
-    (function(){
-        var a = {};
-        var b = {};
-        var c = {};
-        var d = {};
-        var e = {};
-        var f = {};
-        var g = {};
-        var h = {};
-        var i = {};
-        var j = {};
-        var nodes = [a, b, c, d, e, f, g, h, i, j];
-        var links = [
-            newLink(a, b),
-            newLink(b, c),
-            newLink(c, d),
-            newLink(d, e),
-            newLink(e, f),
-            newLink(f, a),
-            newLink(a, h),
-            newLink(a, i),
-            newLink(a, j),
-            newLink(g, a),
-            newLink(g, b),
-            newLink(g, f),
-            newLink(g, d)
-        ];
-        newGraph(1000, 1000, nodes, links, "gray");
-    })();
-    (function(){
-        var a = {};
-        var b = {};
-        var c = {};
-        var d = {};
-        var e = {};
-        var f = {};
-        var nodes = [a, b, c, d, e, f];
-        var links = [
-            newLink(a, b),
-            newLink(b, c),
-            newLink(b, d),
-            newLink(b, e),
-            newLink(f, c),
-            newLink(f, d),
-            newLink(f, e)
-        ];
-        newGraph(400, 400, nodes, links, "green");
-    })();
-    (function(){
-        var a = {};
-        var b = {};
-        var c = {};
-        var d = {};
-        var nodes = [a, b, c, d];
-        var links = [
-            newLink(a, b),
-            newLink(b, c),
-            newLink(c, d)
-        ];
-        newGraph(170, 170, nodes, links, "yellow");
-    })();
-    (function(){
-        var a = {};
-        var b = {};
-        var c = {};
-        var nodes = [a, b, c];
-        var links = [
-            newLink(a, b),
-            newLink(b, c)
-        ];
-        newGraph(75, 75, nodes, links, "red");
-    })();
-    (function(){
-        var a = {};
-        var b = {};
-        var c = {};
-        var nodes = [a, b, c];
-        var links = [
-            newLink(a, b),
-            newLink(b, c)
-        ];
-        newGraph(750, 750, nodes, links, "purple");
-    })();
+    schemadown("example.schemadown");
+
 })();
