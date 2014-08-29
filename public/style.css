@@ -8,9 +8,6 @@ svg {
     margin : 5px;
 }
 
-.node {
-    stroke: gray;
-}
 
 .link {
     stroke: gray;
