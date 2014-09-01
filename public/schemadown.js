@@ -52,18 +52,30 @@
             .append("circle")
             .attr("class", "node")
             .attr("stroke", "black")
-            //.attr("stroke-width", "3")
-            .attr("fill", "black")
+            .attr("fill", "gray")
             .attr("fill-opacity", "1")
             .attr("r", r);
             
         gNodes
+            .append("rect")
+            .attr("width", r * 2)
+            .attr("height", r * 2)
+            .attr("x", -r )
+            .attr("y", -r )
+            .attr("stroke", "none")
+            .attr("stroke-opacity", 0.5)
+            .attr("fill", "none")
+            ;
+            
+            
+        gNodes
             .append("text")
-            .attr("stroke", "white")
+            .attr("fill", "black")
             .attr("font-size", "15")
-            .attr("textLength", r * 4)
+            .attr("textLength", r *2 * 0.9)
             .attr("lengthAdjust", "spacingAndGlyphs")
-            .attr("x", -r * 2)
+            .attr("x", -r*0.9)
+            .attr("y", 3)
             .text(function(d){return d.name;});
 
 
