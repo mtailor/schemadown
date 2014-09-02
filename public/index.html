@@ -10,11 +10,7 @@
 </head>
 <body class="container" ng-controller="mainController" ng-cloak>
 
-<textarea ng-model="input"></textarea>
-<a href="#" class="btn btn-primary btn-lg" ng-click="parseInput()">
-    <span class="glyphicon glyphicon-refresh"></span>
-    refresh
-</a>
+<textarea ng-model="input" ng-change="parseInput()"></textarea>
 <svg></svg>
 
 

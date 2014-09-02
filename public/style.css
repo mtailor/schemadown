@@ -18,7 +18,9 @@ a {
 
 svg {
     border : 1px solid;
-    margin : 5px;
+    margin : 10px;
+    margin : 0 auto;
+    display:block;
 }
 
 

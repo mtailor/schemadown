@@ -6,12 +6,12 @@ angular
 .controller('mainController', function($scope, $http, parsingService, drawingService){
     $http.get('example.schemadown').success(function(data){
         $scope.input = data;
+        $scope.parseInput();
     });
     $scope.parseInput = function(){
         parsingService
             .parseAsNodesAndLinks($scope.input)
             .then(function(res){
-                console.log(res);
                 drawingService.draw(res);
             });
     };
@@ -28,7 +28,6 @@ angular
 })
 .service('drawingService', function(){
     this.draw = function(nodesAndLinks){
-        console.log("drawing");
         var width = 500;
         var height = 500;
         var nodes = nodesAndLinks.nodes;
@@ -46,13 +45,15 @@ angular
         });
         
         var svg = d3.select('svg');
-        
+
         //clear
         svg
             .attr("width", width)
             .attr("height", height)
-            .select("*")
+            .selectAll("*")
             .remove();
+            
+        console.log(svg, svg.select("*"))    ;
             
         //setup the layout    
         var force = 

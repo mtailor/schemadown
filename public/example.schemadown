@@ -1,4 +1,3 @@
-
 CertiLogiciel => DbExploit
 CSOC => DbExploit
 CertiSupport => DbExploit
@@ -13,20 +12,3 @@ WebRaPhpDeux => WebRaJavaDeux
 WebRaJavaUn => Cm
 WebRaJavaDeux => Cm
 Cm => DbCm
-
-
-ACertiLogiciel => DbExploit
-BCSOC => DbExploit
-ACertiSupport => DbExploit
-AFeed => AFeedADbExploit
-Feed => DbWebRaUn
-Feed => ADbWebRaDeux
-AFeed => DbCm
-ADbWebRaUn => WebRaPhpUn
-ADbWebRaDeux => AWebRaPhpDeux
-WebRaPhpUn => AWebRaJavaUn
-AWebRaPhpDeux => WebRaJavaDeux
-WebRaJavaUn => ACm
-WebRaJavaDeux => ACm
-Cm => ADbCm
-
