@@ -26,7 +26,14 @@ angular
             });
     }
 })
-.service('drawingService', function(){
+.service('colorService', function(){
+    this.getColor = function(someStr){
+        var randomColor = '#' + md5(someStr).slice(0, 6);
+        var nicerColor = one.color(randomColor).lightness(0.5).saturation(0.5).hex();
+        return nicerColor;
+    }
+})
+.service('drawingService', function(colorService){
     this.draw = function(nodesAndLinks){
         var width = 500;
         var height = 500;
@@ -88,7 +95,7 @@ angular
             .append("circle")
             .attr("class", "node")
             .attr("stroke", "black")
-            .attr("fill", "gray")
+            .attr("fill", function(d){ return colorService.getColor(d.name);})
             .attr("fill-opacity", "1")
             .attr("r", r);
             

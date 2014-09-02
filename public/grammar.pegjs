@@ -63,7 +63,7 @@ link
 }
 
 identifier
-  = chars:[a-zA-Z]+ { return chars.join(""); }
+  = chars:[a-zA-Z0-9]+ { return chars.join(""); }
 
 arrow
   = "=>"
