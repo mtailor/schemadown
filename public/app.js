@@ -60,8 +60,7 @@ angular
             .selectAll("*")
             .remove();
             
-        console.log(svg, svg.select("*"))    ;
-            
+
         //setup the layout    
         var force = 
             d3
@@ -76,11 +75,26 @@ angular
             .links(links)
             .start();
             
+            
+        //arrowheads
+        svg
+            .append("defs")
+            .append("marker")
+            .attr("id", "arrowhead")
+            .attr("refX", 10 + r)
+            .attr("refY", 5)
+            .attr("markerWidth", 10)
+            .attr("markerHeight", 10)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M0,0L0,10L10,5");
+            
         var links = svg
             .selectAll(".link")
             .data(links)
             .enter()
             .append("line")
+            .attr("marker-end", "url(#arrowhead)")
             .attr("class", "link");
         
         var gNodes = svg
@@ -106,7 +120,6 @@ angular
             .attr("x", -r )
             .attr("y", -r )
             .attr("stroke", "none")
-            .attr("stroke-opacity", 0.5)
             .attr("fill", "none");
             
         gNodes
