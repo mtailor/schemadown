@@ -44,7 +44,8 @@ angular
         var minSize = Math.min(width, height);
         var charge = -0.15 * minSize * minSize / n;
         var r      = 0.2 * minSize / Math.sqrt(n);
-        
+        var arrowSize = 0.3 * r;
+
         //place the nodes on some kind of zigzag
         nodes.forEach(function(d, i) {
             d.x = n == 1 ? width / 2 : i * width / (n-1);
@@ -81,13 +82,13 @@ angular
             .append("defs")
             .append("marker")
             .attr("id", "arrowhead")
-            .attr("refX", 10 + r)
-            .attr("refY", 5)
-            .attr("markerWidth", 10)
-            .attr("markerHeight", 10)
+            .attr("refX", arrowSize + r)
+            .attr("refY", arrowSize / 2)
+            .attr("markerWidth", arrowSize)
+            .attr("markerHeight", arrowSize)
             .attr("orient", "auto")
             .append("path")
-            .attr("d", "M0,0L0,10L10,5");
+            .attr("d", "M0,0L0," + arrowSize + "L" + arrowSize +"," + arrowSize/2);
             
         var links = svg
             .selectAll(".link")
