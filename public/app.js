@@ -4,7 +4,7 @@
 angular
 .module('myApp', [])
 .controller('mainController', function($scope, $http, parsingService, drawingService){
-    $http.get('example.schemadown').success(function(data){
+    $http.get('example.schematiz').success(function(data){
         $scope.input = data;
         $scope.parseInput();
     });
