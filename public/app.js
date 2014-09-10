@@ -3,7 +3,12 @@
 
 angular
 .module('myApp', [])
-.controller('mainController', function($scope, $http, parsingService, drawingService){
+.controller('mainController', function($scope, $http, parsingService, drawingService, dummyDataService){
+    
+    drawingService.draw(dummyDataService.getDummy());
+    
+    
+    /*
     $http.get('example.schemadown').success(function(data){
         $scope.input = data;
         $scope.parseInput();
@@ -15,6 +20,71 @@ angular
                 drawingService.draw(res);
             });
     };
+    */
+})
+.service('dummyDataService', function(){
+    
+    function newNode(name){
+        return {
+            name : name
+        };
+    }
+    function newLink(source, target){
+        return {
+            source : source,
+            target : target
+        };
+    }
+    
+    this.getDummy = function(){
+        var main = newNode("Main");
+        var web1 = newNode("Web1");
+        var web2 = newNode("Web2");
+        var web3 = newNode("Web3");
+        var agg = newNode("Aggregator");
+        var dbFoo1 = newNode("DBFoo1");
+        var dbFoo2 = newNode("DBFoo2");
+        var foo1 = newNode("Foo1");
+        var foo2 = newNode("Foo2");
+        var bar1 = newNode("Bar1");
+        var bar2 = newNode("Bar2");
+        var root = newNode("Root");
+        var dbRoot = newNode("DBRoot");
+        
+        return {
+            nodes : [
+                main,
+                web1,
+                web2,
+                web3,
+                agg,
+                dbFoo1,
+                dbFoo2,
+                foo1,
+                foo2,
+                bar1,
+                bar2,
+                root,
+                dbRoot
+            ],
+            links : [
+                newLink(web1, main),
+                newLink(web2, main),
+                newLink(web3, main),
+                newLink(agg, main),
+                newLink(agg, dbFoo1),
+                newLink(agg, dbFoo2),
+                newLink(agg, dbRoot),
+                newLink(foo1, dbFoo1),
+                newLink(foo2, dbFoo2),
+                newLink(foo1, bar1),
+                newLink(foo2, bar2),
+                newLink(bar1,  root),
+                newLink(bar2,  root),
+                newLink(root,  dbRoot)
+            ]
+        }
+    }
 })
 .service('parsingService', function($http){
     this.parseAsNodesAndLinks = function(str) {
