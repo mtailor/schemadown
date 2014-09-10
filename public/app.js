@@ -28,10 +28,11 @@ angular
             name : name
         };
     }
-    function newLink(source, target){
+    function newLink(source, target, doubleArrow){
         return {
             source : source,
-            target : target
+            target : target,
+            doubleArrow : doubleArrow || false
         };
     }
     
@@ -67,9 +68,9 @@ angular
                 dbRoot
             ],
             links : [
-                newLink(web1, main),
-                newLink(web2, main),
-                newLink(web3, main),
+                newLink(web1, main, true),
+                newLink(web2, main, true),
+                newLink(web3, main, true),
                 newLink(agg, main),
                 newLink(agg, dbFoo1),
                 newLink(agg, dbFoo2),
@@ -145,10 +146,10 @@ angular
             .links(links)
             .start();
             
+        var defs = svg.append("defs");
             
         //arrowheads
-        svg
-            .append("defs")
+        defs
             .append("marker")
             .attr("id", "arrowhead")
             .attr("refX", arrowSize + r)
@@ -158,6 +159,16 @@ angular
             .attr("orient", "auto")
             .append("path")
             .attr("d", "M0,0L0," + arrowSize + "L" + arrowSize +"," + arrowSize/2);
+        defs
+            .append("marker")
+            .attr("id", "reversearrowhead")
+            .attr("refX", -r)
+            .attr("refY", arrowSize / 2)
+            .attr("markerWidth", arrowSize)
+            .attr("markerHeight", arrowSize)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M" + arrowSize + ",0L" + arrowSize + "," + arrowSize + "L0," + arrowSize/2);
             
         var links = svg
             .selectAll(".link")
@@ -165,6 +176,7 @@ angular
             .enter()
             .append("line")
             .attr("marker-end", "url(#arrowhead)")
+            .attr("marker-start", function(link){ return link.doubleArrow ? "url(#reversearrowhead)" : "";})
             .attr("class", "link");
         
         var gNodes = svg
@@ -180,7 +192,7 @@ angular
             .attr("class", "node")
             .attr("stroke", "black")
             .attr("fill", function(d){ return colorService.getColor(d.name);})
-            .attr("fill-opacity", "1")
+            .attr("fill-opacity", 1)
             .attr("r", r);
             
         gNodes
