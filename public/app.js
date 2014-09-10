@@ -78,7 +78,7 @@ angular
                 newLink(foo1, dbFoo1),
                 newLink(foo2, dbFoo2),
                 newLink(foo1, bar1),
-                newLink(foo2, bar2),
+                newLink(foo2, bar2), 
                 newLink(bar1,  root),
                 newLink(bar2,  root),
                 newLink(root,  dbRoot)
@@ -98,10 +98,24 @@ angular
 })
 .service('colorService', function(){
     this.getColor = function(someStr){
-        var randomColor = '#' + md5(someStr).slice(0, 6);
+        var randomColor = md5(someStr).slice(0, 6);
         var nicerColor = one.color(randomColor).lightness(0.5).saturation(0.5).hex();
-        return nicerColor;
+        return this.mix(nicerColor, "555");
     }
+    this.mix = function (hexColorA, hexColorB){
+        var a = one.color(hexColorA);
+        var b = one.color(hexColorB);
+        var R = Math.floor(255 * (a.red() + b.red()) /2);
+        var G = Math.floor(255 * (a.green() + b.green()) /2);
+        var B = Math.floor(255 * (a.blue() + b.blue()) /2);
+        console.log(a);
+        console.log(b);
+        console.log(R);
+        console.log(G);
+        console.log(B);
+        return one.color('rgb(' + R + ', ' + G + ', ' + B + ')').hex();
+    }
+    
 })
 .service('drawingService', function(colorService){
     this.draw = function(nodesAndLinks){
